@@ -31,7 +31,9 @@
                     </form>
                 </div>
                 <div class="quizWrapper" ng-show="inProgress && !quizIsOver">
-                    <h2 ng-model="question">{{question}}</h2>
+                    <h2 ng-model="section">{{section}}</h2>
+                    <h3 ng-model="subsection">{{subsection}}</h3>
+                    <p ng-model="statement">{{statement}}</p>
                     <button type="button" name="button" value="5" ng-click="nextQuestion(5)">5</button>
                     <button type="button" name="button" value="4" ng-click="nextQuestion(4)">4</button>
                     <button type="button" name="button" value="3" ng-click="nextQuestion(3)">3</button>

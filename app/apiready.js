@@ -8,15 +8,62 @@ class Customer {
     }
 }
 
+class Section {
+    constructor(name, subsections) {
+        this.name = name;
+        this.subsections = subsections;
+    }
+}
+
+class SubSection {
+    constructor(level, statement) {
+        this.level = level;
+        this.statement = statement;
+    }
+}
+
+
 apiReadyApp.controller('quizController', function($scope) {
-    var questions = ["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6", "Question 7", "Question 8"];
+    const basic = "Basic";
+    const onTrack = "On Track";
+    const apiReady = "API Ready";
+
+    var sections =  [
+        new Section("Strategy & Organization", [new SubSection(basic, "Strategy exists but is incomplete."),
+                                                            new SubSection(onTrack, "Strategy, roles, and processes documented."),
+                                                            new SubSection(apiReady, "Road map for API centric organization. Strategy in place.")]),
+        new Section("Design", [new SubSection(basic, "Current APIs identified and documented."),
+                                            new SubSection(onTrack, "Understanding effective API design."),
+                                            new SubSection(apiReady, "Missing APIs identified. Re-design in line with strategy.")]),
+        new Section("DevOps", [new SubSection(basic, "Infrastructure for deploying APIs."),
+                                            new SubSection(onTrack, "Implementing API DevOps best practices."),
+                                            new SubSection(apiReady, "Development, infrastructure and process in place.")]),
+        new Section("Visualize", [new SubSection(basic, "Need of visualization strategy identified."),
+                                            new SubSection(onTrack, "Desired API image identified."),
+                                            new SubSection(apiReady, "Visualization strategy in place.")]),
+        new Section("Secure", [new SubSection(basic, "Knowledge of API security issues."),
+                                            new SubSection(onTrack, "Actions planned."),
+                                            new SubSection(apiReady, "Security policy documented.")]),
+        new Section("Test", [new SubSection(basic, "Load and security tests exists."),
+                                            new SubSection(onTrack, "Improvements API testing identified."),
+                                            new SubSection(apiReady, "Complete test strategy documented.")]),
+        new Section("Monitor", [new SubSection(basic, "Monitoring of API gateways exists."),
+                                            new SubSection(onTrack, "Improvements for API monitoring identified."),
+                                            new SubSection(apiReady, "Complete monitoring strategy documented.")]),
+        new Section("Infrastructure", [new SubSection(basic, "API management need identified."),
+                                            new SubSection(onTrack, "Requirements prioritized, POC."),
+                                            new SubSection(apiReady, "API management implemented.")])
+    ];
     var index = 0;
     var answers = [];
     $scope.submitAndStartTest = function() {
         customer = new Customer($scope.name, $scope.companyName, $scope.email);
         $scope.quizOver = false;
         $scope.inProgress = true;
-        $scope.question = questions[index];
+        var section = sections[index];
+        $scope.section = section.name;
+        $scope.subsection = section.subsections[index].level;
+        $scope.statement = section.subsections[index].statement;
     }
 
     $scope.nextQuestion = function(answer) {
