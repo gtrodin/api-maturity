@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="apiReadyApp" ng-cloak>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>API Ready</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="apiready.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div ng-controller="quizController">
+            <div class="container">
+                <h1>API Ready Quiz</h1>
+                <div class="customerFormWrapper" ng-show="!inProgress">
+                    <form class="customerForm" name="customerForm" novalindexate>
+                        <div class="formInputRow">
+                            <input type="text" name="name" ng-model="name" placeholder="Your Name" required>
+                            <span ng-show="customerForm.name.$error.required && customerForm.name.$touched">Name is required</span>
+                        </div>
+                        <div class="formInputRow">
+                            <input type="text"name="companyName" ng-model="companyName" placeholder="Company Name" required>
+                            <span ng-show="customerForm.companyName.$error.required && customerForm.companyName.$touched">Company name is required</span>
+                        </div>
+                        <div class="formInputRow">
+                            <input type="email" name="email" ng-model="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" placeholder="Email" required>
+                            <span ng-show="customerForm.email.$error.required && customerForm.email.$touched">Email is required.</span>
+                            <span ng-show="customerForm.email.$error.email && customerForm.email.$touched">Invalid email address</span>
+                        </div>
+                        <div class="startButtonContainer">
+                            <input class="quizButton" type="submit" value="Start" ng-disabled="customerForm.name.$invalid || customerForm.companyName.$invalid || customerForm.email.$invalid" ng-click="submitAndStartTest()">
+                        </div>
+                    </form>
+                </div>
+                <div class="quizWrapper" ng-show="inProgress && !quizIsOver">
+                    <h2 ng-model="question">{{question}}</h2>
+                    <button type="button" name="button" value="5" ng-click="nextQuestion(5)">5</button>
+                    <button type="button" name="button" value="4" ng-click="nextQuestion(4)">4</button>
+                    <button type="button" name="button" value="3" ng-click="nextQuestion(3)">3</button>
+                    <button type="button" name="button" value="2" ng-click="nextQuestion(2)">2</button>
+                    <button type="button" name="button" value="1" ng-click="nextQuestion(1)">1</button>
+                </div>
+                <div ng-show="quizIsOver">
+                    <h2>Quiz is over</h2>
+                    <h2>Your API Ready score is {{score}}</h2>
+                    <button ng-click="restartQuiz()" type="button" name="button">Restart Quiz</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
