@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html ng-app="apiMaturityApp" ng-cloak>
+<head>
+    <title>API Maturity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="app.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="wrapper" ng-controller="mainController">
+        <div class="header">
+            API Maturity by<img class="img-responsive img-rounded" src="images/logo.jpg" alt="Redpill-Linpro">
+        </div>
+        <div class="container" ng-show="!inProgress">
+            <form class="form-horizontal" name="customerForm" novalidate>
+                <h2>Personal Info</h2>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" ng-model="name" placeholder="Your Name*" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text"name="companyName" ng-model="companyName" placeholder="Company Name*" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="email" name="email" ng-model="email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" placeholder="Email*" required>
+                </div>
+                <div class="form-group">
+                    <div class="form-submit-container">
+                        <input class="btn btn-danger btn-lg" type="submit" value="START" ng-disabled="customerForm.name.$invalid || customerForm.companyName.$invalid || customerForm.email.$invalid" ng-click="storeCustomerAndInitQuiz()">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="container" ng-show="inProgress && !quizIsOver">
+            <h3>{{sectionLevel}}</h3>
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="subSection in subSections">
+                    <div class="well well-sm">
+                        <h4>{{subSection.level}}</h4>
+                        <p class="statement">{{subSection.statement}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 column-left">
+                    Basic
+                </div>
+                <div class="col-sm-4 column-center">
+                    On Track
+                </div>
+                <div class="col-sm-4 column-right">
+                    API Ready
+                </div>
+            </div>
+            <div class="row">
+                <div class="btn-group btn-group-justified btn-group-lg button-container">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 0">0</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 1">1</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 2">2</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 3">3</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 4">4</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 5">5</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 6">6</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 7">7</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 8">8</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="answerValue = 9">9</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger btn-xs"  ng-click="answerValue = 10">10</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row navigation-buttons-container">
+                <div class="col-sm-6 button-column-left">
+                    <button type="button" class="btn btn-danger btn-lg" ng-click="backButtonClicked()">BACK</button>
+                </div>
+                <div class="col-sm-6 button-column-right">
+                    <button type="button" class="btn btn-danger btn-lg" ng-click="nextButtonClicked()">NEXT</button>
+                </div>
+            </div>
+        </div>
+        <div class="container" ng-show="quizIsOver">
+            <h3>Quiz is over!</h3>
+            <h4>Your company is {{score}}% API mature!</h4>
+            <div class="progress">
+                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{score}}"
+                aria-valuemin="0" aria-valuemax="100" style="width:{{score}}%">
+                <span>{{score}}</span>%
+                </div>
+            </div>
+            <h4>{{comment}}</h4>
+            <div class="finish-container">
+                <button type="button" class="btn btn-danger btn-lg" ng-click="resetQuiz()">Restart</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

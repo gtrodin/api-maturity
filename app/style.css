@@ -1,50 +1,80 @@
-.quizButton {
-    color: #FFF;
-    background-color: #F44336;
-    animation-duration: 3ms;
-    transition: all .2s ease-in-out;
-    border: none;
-    border-radius: 2px;
-    letter-spacing: .03em;
-    font-size: 2vmin;
-    height: 5vmin;
-    width: 20vmin;
-    cursor: pointer;
-}
-.quizButton:disabled {
-    background-color: gray;
-}
-.customerFormWrapper {
-    position: absolute;
-    height: 100%;
-    width: 100%
+body {
+    font-family: "Open Sans", sans-serif;
 }
 
-.customerForm {
-    vertical-align: middle;
-    border-radius: 4px;
-    padding: 2vmin;
-    width: 40vmin;
-    background-color: #f2f2f2;
+.header {
+    text-align: center;
+    font-size: 4vmin;
 }
 
-.customerForm span {
-    font-family: sans-serif;
-    font-size: 2vmin;
+.form-submit-container {
+    text-align: center;
 }
 
-.customerForm input {
-    font-size: 2vmin;
-    height: 3vmin;
-    width: 20vmin;
-    border-radius: 2px;
+.column-left {
+    float: left;
+    width: 33.333333%;
+    text-align: left;
 }
 
-.formInputRow {
-    display: block;
-    margin-bottom: 1em;
+.column-center {
+    float: left;
+    width: 33.333333%;
+    text-align: center;
 }
 
-.formStartButtonContainer {
+.column-right {
+    float: left;
+    width: 33.333333%;
+    text-align: right;
+}
 
+.well {
+    min-height: 109px;
+    max-height: 129px;
+}
+
+.statement {
+    font-style: italic;
+}
+
+.button-container {
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navigation-buttons-container {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.button-column-left {
+    width: 50%;
+    float: left;
+    text-align: left;
+}
+.button-column-right {
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+
+.finish-container {
+    text-align: center;
+}
+
+.progress {
+    height: 30px;
+}
+
+.progress-bar {
+    width: 70%;
+    font-size: 15px;
+    line-height: 30px;
+}
+
+.img-responsive {
+    width: 33%;
+    display: inline-block;
 }
